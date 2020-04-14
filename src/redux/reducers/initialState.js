@@ -1,3 +1,5 @@
 export default {
-  householdItems: [],
+  householdItems: {
+    householdItems: [],
+  },
 };

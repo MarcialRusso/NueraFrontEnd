@@ -48,15 +48,14 @@ HouseholdItemsPage.propTypes = {
 };
 
 function mapStateToProps(state) {
+  console.log(state.householdItems);
   return {
     householdItems:
-      state.householdItems.length === 0
+      state.householdItems.householdItems.length === 0
         ? []
-        : state.householdItems.map((householdItem) => {
+        : state.householdItems.householdItems.map((householdItem) => {
             return {
               ...householdItem,
-              name: state.householdItems.find((a) => a.id === householdItem.Id)
-                .name,
             };
           }),
   };

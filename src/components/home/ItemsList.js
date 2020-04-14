@@ -1,27 +1,30 @@
+/* eslint-disable react/jsx-no-undef */
 import React from "react";
 import PropTypes from "prop-types";
 
 const ItemList = ({ householdItems: householdItems }) => (
-  <table className="table">
-    <thead>
-      <tr>
-        <th />
-        <th>Name</th>
-        <th>Value</th>
-        <th>Category</th>
-      </tr>
-    </thead>
-    <tbody>
-      {householdItems.map((item) => {
-        return (
-          <tr key={item.id}>
-            <td>{item.Name}</td>
-            <td>{item.Value}</td>
-          </tr>
-        );
-      })}
-    </tbody>
-  </table>
+  <div>
+    {/* techdebt put this within a frame */}
+    {householdItems.map((categorizedItems) => (
+      <ul key={categorizedItems.category}>
+        <p>
+          {/* techdebt add a text output component */}
+          {categorizedItems.category} {"$"}
+          {categorizedItems.totalValue}
+        </p>
+        <p>
+          {categorizedItems.items.map((item) => (
+            <ul key={item.id}>
+              <p>
+                {item.name} {"$"}
+                {item.value}
+              </p>
+            </ul>
+          ))}
+        </p>
+      </ul>
+    ))}
+  </div>
 );
 
 ItemList.propTypes = {

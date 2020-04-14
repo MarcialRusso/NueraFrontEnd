@@ -1,7 +1,7 @@
 import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
 
-export default function itemReducer(
+export default function householdItemReducer(
   state = initialState.householdItems,
   action
 ) {

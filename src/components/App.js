@@ -4,7 +4,7 @@ import HomePage from "./home/HomePage";
 import AboutPage from "./about/AboutPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
-import ItemsPage from "./home/HouseholdItemsPage";
+import HouseholdItemsPage from "./home/HouseholdItemsPage";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
-        <Route path="/householdItems" component={ItemsPage} />
+        <Route path="/householdItems" component={HouseholdItemsPage} />
         <Route component={PageNotFound} />
       </Switch>
       <ToastContainer autoClose={3000} hideProgressBar />
