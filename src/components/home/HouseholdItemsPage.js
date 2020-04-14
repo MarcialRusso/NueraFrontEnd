@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as itemActions from "../../redux/actions/itemActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import ItemList from "./ItemsList";
+import ItemListForm from "./ItemsListForm";
 import { Redirect } from "react-router-dom";
 
 class HouseholdItemsPage extends React.Component {
@@ -24,19 +24,9 @@ class HouseholdItemsPage extends React.Component {
   render() {
     return (
       <>
-        {this.state.redirectToAddHouseholdItemPage && (
-          <Redirect to="/householdItem" />
-        )}
         <h2>Items</h2>
-        <button
-          style={{ marginBottom: 20 }}
-          className="btn btn-primary add-item"
-          onClick={() => this.setState({ redirectToAddCoursePage: true })}
-        >
-          Add Item
-        </button>
 
-        <ItemList householdItems={this.props.householdItems} />
+        <ItemListForm householdItems={this.props.householdItems} />
       </>
     );
   }
