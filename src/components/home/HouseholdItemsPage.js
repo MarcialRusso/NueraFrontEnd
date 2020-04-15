@@ -9,6 +9,9 @@ import SelectInput from "../common/SelectInput";
 class HouseholdItemsPage extends React.Component {
   state = {
     redirectToAddHouseholdItemPage: false,
+    newItemName: "",
+    newItemValue: 0,
+    newItemCategory: "",
   };
 
   componentDidMount() {
@@ -27,7 +30,11 @@ class HouseholdItemsPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const item = event.value;
+    const item = {
+      name: this.newItemName.value,
+      value: this.newItemValue.value,
+      category: this.newItemCategory.value,
+    };
     itemActions
       .saveItem(item)
       .then(() => {
@@ -51,18 +58,22 @@ class HouseholdItemsPage extends React.Component {
         </>
         <>
           <form onSubmit={this.handleSubmit}>
-            <input></input>
-
             <input
               type="text"
               name="name"
-              value={this.state.name}
+              value={this.state.newItemName}
+              onChange={this.handleChange}
+            />
+            <input
+              type="number"
+              name="value"
+              value={this.state.newItemValue}
               onChange={this.handleChange}
             />
             <input
               type="text"
-              name="value"
-              value={this.state.value}
+              name="category"
+              value={this.state.newItemCategory}
               onChange={this.handleChange}
             />
             <button type="submit" className="btn btn-primary">
