@@ -9,7 +9,7 @@ const ItemList = ({ householdItems }) => {
         {categorizedItems.category} {"$"}
         {categorizedItems.totalValue}
       </p>
-      <p>
+      <span>
         {categorizedItems.items.map((item) => (
           <ul key={item.id}>
             <p>
@@ -18,7 +18,7 @@ const ItemList = ({ householdItems }) => {
             </p>
           </ul>
         ))}
-      </p>
+      </span>
     </ul>
   ));
 };

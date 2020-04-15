@@ -23,9 +23,13 @@ class HouseholdItemsPage extends React.Component {
     }
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
+  // handleChange(event) {
+  //   this.setState({ value: event.target.value });
+  // }
+
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -38,25 +42,24 @@ class HouseholdItemsPage extends React.Component {
     actions
       .saveItem(item)
       .then(() => {
-        history.push("/householdItems");
+        // force a re-render, is gross but will get it working?
+        // could try to concat new item to existing items
       })
       .catch((error) => {
         alert(error);
       });
   };
 
-  handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
-  };
   render() {
     //const categories = ["Electronics", "Clothing", "Kitchen"];
     return (
       <>
-        <>
+        <div>
           <h2>Items</h2>
           <ItemList householdItems={this.props.householdItems} />
-        </>
-        <>
+        </div>
+        <div>
+          {/* techdebt, check if this can be moved outside the scope of this container */}
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
@@ -80,7 +83,7 @@ class HouseholdItemsPage extends React.Component {
               {"Add"}
             </button>
           </form>
-        </>
+        </div>
       </>
     );
   }
