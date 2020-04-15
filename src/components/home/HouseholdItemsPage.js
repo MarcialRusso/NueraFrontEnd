@@ -4,6 +4,7 @@ import * as itemActions from "../../redux/actions/itemActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import ItemList from "./ItemsList";
+import SelectInput from "../common/SelectInput";
 
 class HouseholdItemsPage extends React.Component {
   state = {
@@ -25,38 +26,51 @@ class HouseholdItemsPage extends React.Component {
   }
 
   handleSubmit(event) {
-    /*save new item here*/
     event.preventDefault();
+    const item = event.value;
+    itemActions
+      .saveItem(item)
+      .then(() => {
+        history.push("/householdItems");
+      })
+      .catch((error) => {
+        alert(error);
+      });
   }
 
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
   render() {
+    //const categories = ["Electronics", "Clothing", "Kitchen"];
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h2>Items</h2>
-        <ItemList householdItems={this.props.householdItems} />
-        <div>
-          <div role="listbox" aria-expanded="false">
-            <div role="alert" aria-live="polite" aria-atomic="true">
-              Select Category
-            </div>
-            <i aria-hidden="true"></i>
-            <div>
-              <div role="option" aria-checked="false" aria-selected="true">
-                <span>Electronics</span>
-              </div>
-              <div role="option" aria-checked="false" aria-selected="false">
-                <span>Clothing</span>
-              </div>
-              <div role="option" aria-checked="false" aria-selected="false">
-                <span>Kitchen</span>
-              </div>
-            </div>
-          </div>
-          <button type="submit" className="btn btn-primary">
-            {"Add"}
-          </button>
-        </div>
-      </form>
+      <>
+        <>
+          <h2>Items</h2>
+          <ItemList householdItems={this.props.householdItems} />
+        </>
+        <>
+          <form onSubmit={this.handleSubmit}>
+            <input></input>
+
+            <input
+              type="text"
+              name="name"
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+            <input
+              type="text"
+              name="value"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+            <button type="submit" className="btn btn-primary">
+              {"Add"}
+            </button>
+          </form>
+        </>
+      </>
     );
   }
 }
