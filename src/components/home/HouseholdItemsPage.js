@@ -8,7 +8,6 @@ import SelectInput from "../common/SelectInput";
 
 class HouseholdItemsPage extends React.Component {
   state = {
-    redirectToAddHouseholdItemPage: false,
     newItemName: "",
     newItemValue: 0,
     newItemCategory: "",
@@ -28,14 +27,15 @@ class HouseholdItemsPage extends React.Component {
     this.setState({ value: event.target.value });
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
+    const { actions } = this.props;
     const item = {
       name: this.newItemName.value,
       value: this.newItemValue.value,
       category: this.newItemCategory.value,
     };
-    itemActions
+    actions
       .saveItem(item)
       .then(() => {
         history.push("/householdItems");
@@ -43,7 +43,7 @@ class HouseholdItemsPage extends React.Component {
       .catch((error) => {
         alert(error);
       });
-  }
+  };
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
@@ -60,21 +60,21 @@ class HouseholdItemsPage extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
-              name="name"
-              value={this.state.newItemName}
-              onChange={this.handleChange}
+              name="newItemName"
+              defaultValue="name"
+              ref={(input) => (this.newItemName = input)}
             />
             <input
               type="number"
-              name="value"
-              value={this.state.newItemValue}
-              onChange={this.handleChange}
+              name="newItemValue"
+              defaultValue="value"
+              ref={(input) => (this.newItemValue = input)}
             />
             <input
               type="text"
-              name="category"
-              value={this.state.newItemCategory}
-              onChange={this.handleChange}
+              name="newItemCategory"
+              defaultValue="category"
+              ref={(input) => (this.newItemCategory = input)}
             />
             <button type="submit" className="btn btn-primary">
               {"Add"}
@@ -109,6 +109,7 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       fetchItems: bindActionCreators(itemActions.fetchItems, dispatch),
+      saveItem: bindActionCreators(itemActions.saveItem, dispatch),
     },
   };
 }
