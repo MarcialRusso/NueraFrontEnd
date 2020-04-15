@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import * as itemActions from "../../redux/actions/itemActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import ItemListForm from "./ItemsListForm";
-import { Redirect } from "react-router-dom";
+import ItemList from "./ItemsList";
 
 class HouseholdItemsPage extends React.Component {
   state = {
@@ -21,13 +20,43 @@ class HouseholdItemsPage extends React.Component {
     }
   }
 
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handleSubmit(event) {
+    /*save new item here*/
+    event.preventDefault();
+  }
+
   render() {
     return (
-      <>
+      <form onSubmit={this.handleSubmit}>
         <h2>Items</h2>
-
-        <ItemListForm householdItems={this.props.householdItems} />
-      </>
+        <ItemList householdItems={this.props.householdItems} />
+        <div>
+          <div role="listbox" aria-expanded="false">
+            <div role="alert" aria-live="polite" aria-atomic="true">
+              Select Category
+            </div>
+            <i aria-hidden="true"></i>
+            <div>
+              <div role="option" aria-checked="false" aria-selected="true">
+                <span>Electronics</span>
+              </div>
+              <div role="option" aria-checked="false" aria-selected="false">
+                <span>Clothing</span>
+              </div>
+              <div role="option" aria-checked="false" aria-selected="false">
+                <span>Kitchen</span>
+              </div>
+            </div>
+          </div>
+          <button type="submit" className="btn btn-primary">
+            {"Add"}
+          </button>
+        </div>
+      </form>
     );
   }
 }
