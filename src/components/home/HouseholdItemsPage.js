@@ -4,10 +4,10 @@ import * as itemActions from "../../redux/actions/itemActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import ItemList from "./ItemsList";
-import SelectInput from "../common/SelectInput";
 
 class HouseholdItemsPage extends React.Component {
   state = {
+    total: 0,
     newItemName: "",
     newItemValue: 0,
     newItemCategory: "",
@@ -37,9 +37,7 @@ class HouseholdItemsPage extends React.Component {
     };
     actions
       .saveItem(item)
-      .then(() => {
-        // getting error TypeError: Invalid attempt to spread non-iterable instance
-      })
+      .then(() => {})
       .catch((error) => {
         alert(error);
       });
@@ -51,7 +49,10 @@ class HouseholdItemsPage extends React.Component {
       <>
         <div>
           <h2>Items</h2>
-          <ItemList householdItems={this.props.householdItems} />
+          <ItemList
+            householdItems={this.props.householdItems}
+            total={this.props.total}
+          />
         </div>
         <div>
           {/* techdebt, check if this can be moved outside the scope of this container */}
@@ -68,6 +69,8 @@ class HouseholdItemsPage extends React.Component {
               defaultValue="value"
               ref={(input) => (this.newItemValue = input)}
             />
+
+            {/*techdebt this should be a dropdown/select with categories array*/}
             <input
               type="text"
               name="newItemCategory"
@@ -86,11 +89,11 @@ class HouseholdItemsPage extends React.Component {
 
 HouseholdItemsPage.propTypes = {
   householdItems: PropTypes.array.isRequired,
+  total: PropTypes.number.isRequired,
   actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
-  console.log(state.householdItems);
   return {
     householdItems:
       state.householdItems.householdItems.length === 0
@@ -100,6 +103,7 @@ function mapStateToProps(state) {
               ...householdItem,
             };
           }),
+    total: state.householdItems.totalValue,
   };
 }
 

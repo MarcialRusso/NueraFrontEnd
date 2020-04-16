@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ItemList = ({ householdItems }) => {
-  return householdItems.map((categorizedItems) => (
+const ItemList = ({ householdItems, total }) => {
+  const itemsList = householdItems.map((categorizedItems) => (
     <ul key={categorizedItems.category}>
       <p>
         {/* techdebt add a text output component */}
@@ -21,6 +21,8 @@ const ItemList = ({ householdItems }) => {
       </span>
     </ul>
   ));
+
+  return itemsList.concat("TOTAL ".concat(total));
 };
 
 ItemList.propTypes = {

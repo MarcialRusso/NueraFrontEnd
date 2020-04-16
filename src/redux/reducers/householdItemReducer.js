@@ -6,12 +6,6 @@ export default function householdItemReducer(
   action
 ) {
   switch (action.type) {
-    case types.CREATE_ITEM_SUCCESS:
-      return [
-        ...state,
-        // getting error TypeError: Invalid attempt to spread non-iterable instance
-        { ...state.householdItems.concat(action.householdItem) },
-      ];
     case types.FETCH_ITEMS_SUCCESS:
       return action.householdItems;
     default:

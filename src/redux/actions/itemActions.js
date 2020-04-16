@@ -5,10 +5,6 @@ export function fetchItemsSuccess(householdItems) {
   return { type: types.FETCH_ITEMS_SUCCESS, householdItems };
 }
 
-export function createItemSuccess(householdItem) {
-  return { type: types.CREATE_ITEM_SUCCESS, householdItem };
-}
-
 export function fetchItems() {
   return function (dispatch) {
     return itemApi
@@ -27,8 +23,11 @@ export function saveItem(householdItem) {
   return function (dispatch, getState) {
     return itemApi
       .saveItem(householdItem)
-      .then((householdItem) => {
-        dispatch(createItemSuccess(householdItem));
+      .then(() => {
+        // techdebt should dispatch Item created action and the item should be added
+        // on the reducer to the current state of householdItems. The problem is the nested array
+        // state makes it really hard to work with
+        dispatch(fetchItems());
       })
       .catch((error) => {
         throw error;
