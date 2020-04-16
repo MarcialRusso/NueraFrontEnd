@@ -23,10 +23,6 @@ class HouseholdItemsPage extends React.Component {
     }
   }
 
-  // handleChange(event) {
-  //   this.setState({ value: event.target.value });
-  // }
-
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
@@ -42,8 +38,7 @@ class HouseholdItemsPage extends React.Component {
     actions
       .saveItem(item)
       .then(() => {
-        // force a re-render, is gross but will get it working?
-        // could try to concat new item to existing items
+        // getting error TypeError: Invalid attempt to spread non-iterable instance
       })
       .catch((error) => {
         alert(error);

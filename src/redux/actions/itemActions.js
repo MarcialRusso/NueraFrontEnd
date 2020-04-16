@@ -5,8 +5,8 @@ export function fetchItemsSuccess(householdItems) {
   return { type: types.FETCH_ITEMS_SUCCESS, householdItems };
 }
 
-export function createItemSuccess(item) {
-  return { type: types.CREATE_ITEM_SUCCESS, item };
+export function createItemSuccess(householdItem) {
+  return { type: types.CREATE_ITEM_SUCCESS, householdItem };
 }
 
 export function fetchItems() {
@@ -27,8 +27,8 @@ export function saveItem(householdItem) {
   return function (dispatch, getState) {
     return itemApi
       .saveItem(householdItem)
-      .then((savedItem) => {
-        dispatch(createItemSuccess(savedItem));
+      .then((householdItem) => {
+        dispatch(createItemSuccess(householdItem));
       })
       .catch((error) => {
         throw error;
