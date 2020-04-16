@@ -70,7 +70,7 @@ class HouseholdItemsPage extends React.Component {
               ref={(input) => (this.newItemValue = input)}
             />
 
-            {/*techdebt this should be a dropdown/select with categories array*/}
+            {/* techdebt this should be a dropdown/select with categories array*/}
             <input
               type="text"
               name="newItemCategory"
